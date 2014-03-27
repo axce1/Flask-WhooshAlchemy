@@ -74,7 +74,7 @@ class _QueryProxy(flask_sqlalchemy.BaseQuery):
             # Whoosh
 
             heapq.heappush(ordered_by_whoosh_rank,
-                (self._whoosh_rank[unicode(getattr(row,
+                (self._whoosh_rank[str(getattr(row,
                     self._primary_key_name))], row))
 
         def _inner():
@@ -155,7 +155,7 @@ class _Searcher(object):
 
 
 def whoosh_index(app, model):
-    ''' Create whoosh index for ``model``, if one does not exist. If 
+    ''' Create whoosh index for ``model``, if one does not exist. If
     the index exists it is opened and cached. '''
 
     # gets the whoosh index for this model, creating one if it does not exist.
@@ -238,7 +238,7 @@ def _after_flush(app, changes):
             bytype.setdefault(change[0].__class__.__name__, []).append((update,
                 change[0]))
 
-    for model, values in bytype.iteritems():
+    for model, values in bytype.items():
         index = whoosh_index(app, values[0][1].__class__)
         with index.writer() as writer:
             primary_field = values[0][1].pure_whoosh.primary_key_name
@@ -268,5 +268,5 @@ flask_sqlalchemy.models_committed.connect(_after_flush)
 #     app = db.get_app()
 # #    for table in db.get_tables_for_bind():
 #     for item in globals():
-# 
+#
 #        #_create_index(app, table)
