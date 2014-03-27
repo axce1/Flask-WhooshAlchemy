@@ -7,6 +7,8 @@ Source code and issue tracking at `GitHub <http://github.com/gyllstromk/Flask-Wh
 
 View the official docs at http://packages.python.org/Flask-WhooshAlchemy/.
 
+Support python 3.x
+
 Install
 -------
 
